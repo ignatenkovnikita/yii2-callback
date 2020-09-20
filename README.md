@@ -21,11 +21,34 @@ or add
 
 to the require section of your `composer.json` file.
 
+Migrations apply
+```
+./console/yii --migrationPath=vendor/ignatenkovnikita/yii2-callback/migrations/
+```
 
 Usage
 -----
 
-Once the extension is installed, simply use it in your code by  :
+Add to backend config
+```
+'modules' => [
+        'callback' => [
+            'class' => 'ignatenkovnikita\callback\Callback'
+        ],
+]
+```
 
-```php
-<?= \ignatenkovnikita\callback\AutoloadExample::widget(); ?>```
+
+Add `CreateAction` to frontend controller for callback url and disable for action csrf
+```
+public $enableCsrfValidation = false;
+
+    public function actions()
+    {
+        return [
+            'create' => [
+                'class' => 'ignatenkovnikita\callback\actions\CreateAction'
+            ]
+        ];
+    }
+```
